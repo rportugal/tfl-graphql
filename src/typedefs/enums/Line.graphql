@@ -1,0 +1,5 @@
+enum Line {
+  victoria
+  circle
+  bakerloo
+}
