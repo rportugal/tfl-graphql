@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
+const cors = require('cors');
 
 const ContextFactory = require('./contextFactory');
 
 // TODO: https://gist.github.com/i-like-robots/a4608cbdf21d979d9452
 const app = express();
-const PORT = 3000;
+app.use(cors());
+
+const PORT = 4001;
 
 const typeDefs = `
 enum Line {
@@ -34,9 +37,9 @@ enum Mode {
 #}
 
 type Coords {
-    lat: Float!
-    lon: Float!
-  }  
+  lat: Float!
+  lon: Float!
+}  
 
 type StopPoint {
   naptanId: String
@@ -50,6 +53,7 @@ type TimeTable {
 }
 
 type Arrival {
+  id: String
   platformName: String
   timeToStation: Int
   vehicleId: String

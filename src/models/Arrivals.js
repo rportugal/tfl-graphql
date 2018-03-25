@@ -14,6 +14,8 @@ class Arrivals {
 
     const httpCacheData = parseCacheControl(data.headers['cache-control']);
     cacheControl.setCacheHint({ maxAge: httpCacheData['max-age'] });
+    console.log('### data');
+    console.log(data.data);
     return data.data;
   }
 }
