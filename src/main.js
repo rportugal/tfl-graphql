@@ -99,6 +99,11 @@ const resolvers = {
     stopPointById(obj, { id }, { models: { StopPoint } }, { cacheControl }) {
       return StopPoint.getById(id, cacheControl);
     }
+  },
+  Arrival: {
+    lineId(obj, args, ctx, { cacheControl }) {
+      cacheControl.setCacheHint({ maxAge: 1234 });
+    }
   }
 };
 
