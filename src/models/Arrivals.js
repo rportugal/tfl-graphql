@@ -3,6 +3,7 @@ const parseCacheControl = require('parse-cache-control');
 
 class Arrivals {
   async getArrivalsForStop(naptanId, line, cacheControl) {
+    console.log(`### Arrivals.getArrivalsForStop ${naptanId} ${line}`);
     const url = `https://api.tfl.gov.uk/Line/${line}/Arrivals/${naptanId}`;
     console.log(url);
     const data = await axios.get(url, {

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+// const { ApolloEngine } = require('apollo-engine');
 const { makeExecutableSchema } = require('graphql-tools');
 const cors = require('cors');
 
@@ -10,9 +11,23 @@ const ContextFactory = require('./contextFactory');
 const app = express();
 app.use(cors());
 
+// const engine = new ApolloEngine({
+//   apiKey: process.env.API_KEY
+// });
+
+// engine.listen({
+//   port: 3000,
+//   expressApp: app
+// });
 const PORT = 4001;
 
 const typeDefs = `
+type AdditionalProperty {
+  category: String
+  key: String
+  value: String
+}
+
 enum Line {
   Bakerloo
   Central
@@ -46,6 +61,9 @@ type StopPoint {
   modes: [String]
   coords: Coords
   commonName: String
+  stopType: String
+  additionalProperties: [AdditionalProperty]
+  children: [StopPoint]
 }
 
 type TimeTable {
@@ -93,16 +111,38 @@ const resolvers = {
   //   WaterlooCity
   // },
   Query: {
-    arrivalsForStop(obj, { naptanId, line }, { models: { Arrivals } }, { cacheControl }) {
+    arrivalsForStop(
+      obj,
+      { naptanId, line },
+      {
+        models: { Arrivals }
+      },
+      { cacheControl }
+    ) {
       return Arrivals.getArrivalsForStop(naptanId, line, cacheControl);
     },
-    stopPointById(obj, { id }, { models: { StopPoint } }, { cacheControl }) {
+    stopPointById(
+      obj,
+      { id },
+      {
+        models: { StopPoint }
+      },
+      { cacheControl }
+    ) {
       return StopPoint.getById(id, cacheControl);
     }
   },
   Arrival: {
     lineId(obj, args, ctx, { cacheControl }) {
       cacheControl.setCacheHint({ maxAge: 1234 });
+    }
+  },
+  StopPoint: {
+    coords(obj) {
+      return { lat: obj.lat, lon: obj.lon };
+    },
+    children(obj) {
+      return obj.children;
     }
   }
 };
@@ -118,7 +158,7 @@ app.use(
   graphqlExpress({
     schema,
     context: ContextFactory.create(),
-    tracing: true,
+    // tracing: true,
     cacheControl: true
   })
 );

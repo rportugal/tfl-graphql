@@ -1,0 +1,5 @@
+type AdditionalProperty {
+  category: String
+  key: String
+  value: String
+}

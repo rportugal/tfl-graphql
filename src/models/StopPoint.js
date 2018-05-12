@@ -12,6 +12,8 @@ class StopPoint {
     cacheControl.setCacheHint({ maxAge: httpCacheData['max-age'] });
     return data.body;
   }
+
+  // async getAllStopsByType() {}
 }
 
 module.exports = StopPoint;
