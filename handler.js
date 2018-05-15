@@ -1,7 +1,7 @@
 const { graphqlLambda, graphiqlLambda } = require('apollo-server-lambda');
 const { makeExecutableSchema } = require('graphql-tools');
-const { typeDefs } = require('./src/main');
-const { resolvers } = require('./src/main');
+const { typeDefs } = require('./src/typedefs');
+const { resolvers } = require('./src/resolvers');
 
 const myGraphQLSchema = makeExecutableSchema({
   typeDefs,
