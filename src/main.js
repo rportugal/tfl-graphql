@@ -173,3 +173,8 @@ app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); //
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
+
+module.exports = {
+  typeDefs,
+  resolvers
+}
