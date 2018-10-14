@@ -1,4 +1,0 @@
-type Coords {
-  lat: Float!
-  lon: Float!
-}

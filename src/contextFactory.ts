@@ -1,13 +1,9 @@
-import StopPoint from './models/StopPoint';
-import Arrivals from './models/Arrivals';
+import createModels from './models';
 
 class ContextFactory {
   static create() {
     return {
-      models: {
-        StopPoint: new StopPoint(),
-        Arrivals: new Arrivals()
-      }
+      models: createModels()
     };
   }
 }
