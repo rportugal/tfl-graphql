@@ -5,7 +5,9 @@ export default {
     },
     stopPointById(obj: any, { id }: any, { models: { StopPoint } }: any, { cacheControl }: any) {
       return StopPoint.getById(id, cacheControl);
+    },
+    stopPoints(obj: any, { name }: any, { models: { StopPoint } }: any, { cacheControl }: any) {
+      return StopPoint.search(name, cacheControl);
     }
-    // stopPoints() {}
   }
 };

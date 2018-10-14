@@ -21,7 +21,7 @@ import typeDefs from './typedefs';
 // });
 const PORT = 4001;
 
-const server = new ApolloServer({ typeDefs, resolvers, context: ContextFactory.create() });
+const server = new ApolloServer({ typeDefs, resolvers, context: ContextFactory.create(), cacheControl: true });
 
 const app = express();
 server.applyMiddleware({ app });

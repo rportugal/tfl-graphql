@@ -70,6 +70,7 @@ const typeDefs = gql`
     #bikePointsByRadius(center: Coords!, radius: Float): [BikePoint]
     #   bikePointsByBounds()
     stopPointById(id: String!): StopPoint
+    stopPoints(name: String!): [StopPoint]
     #timetableFromStationToStation(station1: String!, station2: String!, line: Line!): TimeTable
     timetableOutbound(station: String!, line: Line!): TimeTable
     #timetableInbound(station: String!, line: Line!): TimeTable
