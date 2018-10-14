@@ -1,5 +1,5 @@
-const StopPoint = require('./models/StopPoint');
-const Arrivals = require('./models/Arrivals');
+import StopPoint from './models/StopPoint';
+import Arrivals from './models/Arrivals';
 
 class ContextFactory {
   static create() {
@@ -12,4 +12,4 @@ class ContextFactory {
   }
 }
 
-module.exports = ContextFactory;
+export default ContextFactory;

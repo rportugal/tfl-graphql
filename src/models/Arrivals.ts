@@ -2,7 +2,7 @@ const axios = require('axios');
 const parseCacheControl = require('parse-cache-control');
 
 class Arrivals {
-  async getArrivalsForStop(naptanId, line, cacheControl) {
+  async getArrivalsForStop(naptanId: string, line: string, cacheControl: any) {
     console.log(`### Arrivals.getArrivalsForStop ${naptanId} ${line}`);
     const url = `https://api.tfl.gov.uk/Line/${line}/Arrivals/${naptanId}`;
     console.log(url);
@@ -21,4 +21,4 @@ class Arrivals {
   }
 }
 
-module.exports = Arrivals;
+export default Arrivals;

@@ -13,40 +13,26 @@ const resolvers = {
   //   WaterlooCity
   // },
   Query: {
-    arrivalsForStop(
-      obj,
-      { naptanId, line },
-      {
-        models: { Arrivals }
-      },
-      { cacheControl }
-    ) {
+    arrivalsForStop(obj: any, { naptanId, line }: any, { models: { Arrivals } }: any, { cacheControl }: any) {
       return Arrivals.getArrivalsForStop(naptanId, line, cacheControl);
     },
-    stopPointById(
-      obj,
-      { id },
-      {
-        models: { StopPoint }
-      },
-      { cacheControl }
-    ) {
+    stopPointById(obj: any, { id }: any, { models: { StopPoint } }: any, { cacheControl }: any) {
       return StopPoint.getById(id, cacheControl);
     }
   },
   Arrival: {
-    lineId(obj, args, ctx, { cacheControl }) {
+    lineId(obj: any, args: any, ctx: any, { cacheControl }: any) {
       cacheControl.setCacheHint({ maxAge: 1234 });
     }
   },
   StopPoint: {
-    coords(obj) {
+    coords(obj: any) {
       return { lat: obj.lat, lon: obj.lon };
     },
-    children(obj) {
+    children(obj: any) {
       return obj.children;
     }
   }
 };
 
-module.exports = resolvers;
+export default resolvers;

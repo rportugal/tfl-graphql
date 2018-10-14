@@ -1,10 +1,10 @@
 const appId = process.env.TFL_APP_ID;
 const appKey = process.env.TFL_APP_KEY;
 const tfl = require('tfl.api')(appId, appKey);
-const parseCacheControl = require('parse-cache-control');
+import parseCacheControl from 'parse-cache-control';
 
 class StopPoint {
-  async getById(id, cacheControl) {
+  async getById(id: string, cacheControl: any) {
     console.log('StopPoint.getById');
     const data = await tfl.stoppoint.byId(id);
     const httpCacheData = parseCacheControl(data.headers['cache-control']);
@@ -16,4 +16,4 @@ class StopPoint {
   // async getAllStopsByType() {}
 }
 
-module.exports = StopPoint;
+export default StopPoint;
