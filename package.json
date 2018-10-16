@@ -28,11 +28,13 @@
     "cors": "^2.8.4",
     "express": "^4.16.4",
     "graphql": "^14.0.2",
+    "lodash": "^4.17.11",
     "parse-cache-control": "^1.0.1",
     "tfl.api": "^1.6.1"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.2",
+    "@types/lodash": "^4.14.117",
     "nodemon": "^1.18.4",
     "typescript": "^3.1.3"
   }

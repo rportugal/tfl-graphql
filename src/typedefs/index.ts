@@ -35,6 +35,13 @@ const typeDefs = gql`
     lon: Float!
   }
 
+  type RouteSection {
+    lineId: String # TODO: change
+    mode: Mode
+    name: String
+    lineString: String
+  }
+
   type StopPoint {
     naptanId: String
     modes: [String]
@@ -43,6 +50,8 @@ const typeDefs = gql`
     stopType: String
     additionalProperties: [AdditionalProperty]
     children: [StopPoint]
+    arrivals: [Arrival]
+    routeSections: [RouteSection]
   }
 
   type TimeTable {
@@ -50,7 +59,7 @@ const typeDefs = gql`
   }
 
   type Arrival {
-    id: String
+    naptanId: String
     platformName: String
     timeToStation: Int
     vehicleId: String
@@ -69,7 +78,7 @@ const typeDefs = gql`
     #bikePoint(id: String): BikePoint
     #bikePointsByRadius(center: Coords!, radius: Float): [BikePoint]
     #   bikePointsByBounds()
-    stopPointById(id: String!): StopPoint
+    stopPointById(naptanId: String!): StopPoint
     stopPoints(name: String!): [StopPoint]
     #timetableFromStationToStation(station1: String!, station2: String!, line: Line!): TimeTable
     timetableOutbound(station: String!, line: Line!): TimeTable
