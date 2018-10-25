@@ -54,10 +54,6 @@ const typeDefs = gql`
     routeSections: [RouteSection]
   }
 
-  type TimeTable {
-    a: String
-  }
-
   type Arrival {
     naptanId: String
     platformName: String
@@ -74,15 +70,7 @@ const typeDefs = gql`
 
   type Query {
     arrivalsForStop(naptanId: String!, line: Line!): [Arrival]
-    # lines:
-    #bikePoint(id: String): BikePoint
-    #bikePointsByRadius(center: Coords!, radius: Float): [BikePoint]
-    #   bikePointsByBounds()
     stopPointById(naptanId: String!): StopPoint
-    stopPoints(name: String!): [StopPoint]
-    #timetableFromStationToStation(station1: String!, station2: String!, line: Line!): TimeTable
-    timetableOutbound(station: String!, line: Line!): TimeTable
-    #timetableInbound(station: String!, line: Line!): TimeTable
   }
 `;
 

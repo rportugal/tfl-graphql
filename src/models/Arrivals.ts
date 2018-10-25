@@ -2,14 +2,18 @@ import _ from 'lodash';
 import axios from 'axios';
 import parseCacheControl from 'parse-cache-control';
 
+const commonOpts = {
+  params: {
+    app_id: process.env.TFL_APP_ID,
+    app_key: process.env.TFL_APP_KEY
+  }
+};
+
 class Arrivals {
   async getArrivalsForStop(naptanId: string, line: string, cacheControl: any) {
     const url = `${process.env.TFL_API_BASE_URL}/Line/${line}/Arrivals/${naptanId}`;
     const data = await axios.get(url, {
-      params: {
-        app_id: process.env.TFL_APP_ID,
-        app_key: process.env.TFL_APP_KEY
-      }
+      ...commonOpts
     });
 
     const httpCacheData = parseCacheControl(data.headers['cache-control']);
