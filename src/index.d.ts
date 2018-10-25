@@ -1,0 +1,1 @@
+declare module 'parse-cache-control';

@@ -1,0 +1,41 @@
+{
+  "name": "tfl-graphql",
+  "version": "0.1.0",
+  "description": "GraphQL adapter for TfL API, with Cache Control extensions",
+  "main": "index.js",
+  "scripts": {
+    "build:watch": "tsc --watch",
+    "dev": "nodemon -r dotenv/config dist/main.js",
+    "start": "node -r dotenv/config dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rportugal/tfl-graphql.git"
+  },
+  "author": "Ricardo Portugal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rportugal/tfl-graphql/issues"
+  },
+  "homepage": "https://github.com/rportugal/tfl-graphql#readme",
+  "dependencies": {
+    "apollo-engine": "^1.1.2",
+    "apollo-server-express": "^2.1.0",
+    "apollo-server-lambda": "^2.1.0",
+    "axios": "^0.18.0",
+    "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "lodash": "^4.17.11",
+    "parse-cache-control": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.2",
+    "@types/lodash": "^4.14.117",
+    "nodemon": "^1.18.4",
+    "typescript": "^3.1.3"
+  }
+}

@@ -1,0 +1,22 @@
+service: tfl-graphql
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-2
+  memorySize: 512
+
+functions:
+  graphql:
+    handler: handler.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+  graphiql:
+    handler: handler.graphiqlHandler
+    events:
+    - http:
+        path: graphiql
+        method: get
