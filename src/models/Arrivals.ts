@@ -6,7 +6,7 @@ import convertCacheControl from '../helpers/convertCacheControl';
 class Arrivals {
   @convertCacheControl(true)
   async getArrivalsForStop(naptanId: string, line: string, cacheControl: any) {
-    const url = `https://api.tfl.gov.uk/Line/${line}/Arrivals/${naptanId}`;
+    const url = `${process.env.TFL_API_BASE_URL}/Line/${line}/Arrivals/${naptanId}`;
     const data = await axios.get(url, {
       params: {
         app_id: process.env.TFL_APP_ID,

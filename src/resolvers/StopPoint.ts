@@ -2,11 +2,7 @@ export default {
   StopPoint: {
     async arrivals(obj: any, _: any, { models: { Arrivals } }: any, { cacheControl }: any) {
       // TODO: fix modes, lines
-      console.log('-> obj here');
-      console.log(obj);
       const result = await Arrivals.getArrivalsForStop(obj.naptanId, 'District', cacheControl);
-      console.log('-> result here');
-      console.log(result);
       return result;
     },
     children(obj: any) {

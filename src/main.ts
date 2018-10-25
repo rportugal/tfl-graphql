@@ -7,6 +7,9 @@ import ContextFactory from './contextFactory';
 import resolvers from './resolvers';
 import typeDefs from './typedefs';
 
+if (!process.env.TFL_API_BASE_URL) {
+  throw new Error('Add env file');
+}
 // TODO: https://gist.github.com/i-like-robots/a4608cbdf21d979d9452
 
 // app.use(cors());

@@ -1,8 +1,6 @@
 import _ from 'lodash';
-const appId = process.env.TFL_APP_ID;
-const appKey = process.env.TFL_APP_KEY;
-const tfl = require('tfl.api')(appId, appKey);
 import parseCacheControl from 'parse-cache-control';
+import Axios from 'axios';
 
 // function log(target, key, descriptor) {
 //   console.log(`${key} was called!`);
@@ -10,47 +8,60 @@ import parseCacheControl from 'parse-cache-control';
 //   // TODO: call original method
 // }
 
+const STOPPOINT_BASE_URL = `${process.env.TFL_API_BASE_URL}/StopPoint`;
+
 class StopPoint {
   // @convertCacheControl
   // @log
   async getById(id: string, cacheControl: any) {
-    console.log('StopPoint.getById');
-    const data = await tfl.stoppoint.byId(id);
+    const url = `${STOPPOINT_BASE_URL}/${id}`;
+    const data = await Axios.get(url, {
+      params: {
+        app_id: process.env.TFL_APP_ID,
+        app_key: process.env.TFL_APP_KEY
+      }
+    });
     const httpCacheData = parseCacheControl(data.headers['cache-control']);
 
     cacheControl.setCacheHint({ maxAge: httpCacheData['max-age'] });
-    return data.body;
+    return data.data;
   }
 
   // async getAllStopsByType() {}
 
   async getRouteSections(naptanId: string) {
-    const data = await tfl.stoppoint.route(naptanId);
-    console.log('-> getRouteSections');
-    console.log(data.body);
+    const url = `${STOPPOINT_BASE_URL}/${naptanId}/Route`;
+    const data = await Axios.get(url, {
+      params: {
+        app_id: process.env.TFL_APP_ID,
+        app_key: process.env.TFL_APP_KEY
+      }
+    });
+
     const keyMap: any = {
       routeSectionName: 'name'
     };
 
-    const result = _.map(data.body, obj => _.mapKeys(obj, (_, key) => keyMap[key] || key));
+    const result = _.map(data.data, obj => _.mapKeys(obj, (_, key) => keyMap[key] || key));
 
     return result;
   }
 
-  async search(name: string, cacheControl: any) {
-    const data = await tfl.stoppoint.search(name, { modes: 'tube' });
-    const httpCacheData = parseCacheControl(data.headers['cache-control']);
+  // async search(name: string, cacheControl: any) {
+  //   // const data = await tfl.stoppoint.search(name, { modes: 'tube' });
+  //   const url = `${process.env.TFL_API_BASE_URL}/StopPoint/Search`;
+  //   const httpCacheData = parseCacheControl(data.headers['cache-control']);
 
-    cacheControl.setCacheHint({ maxAge: httpCacheData['max-age'] });
+  //   cacheControl.setCacheHint({ maxAge: httpCacheData['max-age'] });
 
-    const keyMap: any = {
-      id: 'naptanId'
-    };
+  //   const keyMap: any = {
+  //     id: 'naptanId'
+  //   };
 
-    const result = _.map(data.body.matches, obj => _.mapKeys(obj, (_, key) => keyMap[key] || key));
-    console.log(result);
-    return result;
-  }
+  //   const result = _.map(data.body.matches, obj => _.mapKeys(obj, (_, key) => keyMap[key] || key));
+  //   console.log(result);
+  //   return result;
+  // }
 }
 
 export default StopPoint;

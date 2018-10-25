@@ -43,7 +43,7 @@ const typeDefs = gql`
   }
 
   type StopPoint {
-    naptanId: String
+    id: String # naptan ID
     modes: [String]
     coords: Coords
     commonName: String
