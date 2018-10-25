@@ -8,7 +8,7 @@ if (!process.env.TFL_API_BASE_URL) {
   throw new Error('Add env file');
 }
 
-const PORT = 4001;
+const PORT = process.env.PORT || 4001;
 
 const server = new ApolloServer({ typeDefs, resolvers, context: ContextFactory.create(), cacheControl: true });
 
