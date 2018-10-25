@@ -1,10 +1,8 @@
 import _ from 'lodash';
 import axios from 'axios';
 import parseCacheControl from 'parse-cache-control';
-import convertCacheControl from '../helpers/convertCacheControl';
 
 class Arrivals {
-  @convertCacheControl(true)
   async getArrivalsForStop(naptanId: string, line: string, cacheControl: any) {
     const url = `${process.env.TFL_API_BASE_URL}/Line/${line}/Arrivals/${naptanId}`;
     const data = await axios.get(url, {
